@@ -5,6 +5,15 @@ Class {
 }
 
 { #category : #rules }
+PTIslandCParser >> cFile [
+	^ super cFile
+		==> [ :production | 
+			PTASTCFile new
+				contents: (production reject: #isCharacter);
+				yourself ]
+]
+
+{ #category : #rules }
 PTIslandCParser >> codeInBrackets [
 	<generated>
 	^ super codeInBrackets ==> [ :production | PTASTCodeInBrackets new contents: (production at: 2); yourself ]
@@ -32,6 +41,12 @@ PTIslandCParser >> function [
 PTIslandCParser >> identifier [
 	<generated>
 	^ super identifier flatten  ==> [ :production | PTASTIdentifier new identifier: production; yourself ]
+]
+
+{ #category : #rules }
+PTIslandCParser >> if [
+	<generated>
+	^ super if ==> [ :production | PTASTIf new codeInParenthesis: (production at: 2); codeInBrackets: (production at: 3); yourself ]
 ]
 
 { #category : #rules }

@@ -15,6 +15,11 @@ PTCVisitor >> visitAll: childrenNodes [
 		ifNotNil: [ childrenNodes do: [ :aChildNode | aChildNode acceptVisitor: self ] ]
 ]
 
+{ #category : #visit }
+PTCVisitor >> visitPTASTCFile: aPTASTCFile [ 
+	^ self visitAll: aPTASTCFile contents
+]
+
 { #category : #visiting }
 PTCVisitor >> visitPTASTCodeInBrackets: aPTASTCodeInBrackets [
 	<generated>
@@ -46,6 +51,13 @@ PTCVisitor >> visitPTASTFunction: aPTASTFunction [
 PTCVisitor >> visitPTASTIdentifier: anPTASTIdentifier [
 	<generated>
 	^ anPTASTIdentifier identifier
+]
+
+{ #category : #visiting }
+PTCVisitor >> visitPTASTIf: aPTASTIf [
+	<generated>
+	self visit: aPTASTIf codeInParenthesis.
+	self visit: aPTASTIf codeInBrackets.
 ]
 
 { #category : #visiting }

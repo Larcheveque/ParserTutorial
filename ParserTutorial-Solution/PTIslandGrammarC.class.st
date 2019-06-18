@@ -11,7 +11,8 @@ Class {
 		'whileLoop',
 		'island',
 		'islandBracket',
-		'islandParenthesis'
+		'islandParenthesis',
+		'if'
 	],
 	#category : #'ParserTutorial-Solution'
 }
@@ -38,6 +39,19 @@ PTIslandGrammarC class >> generationStrategy [
 		visitorClass: #PTCVisitor;
 		keepPositions: false;
 		yourself
+]
+
+{ #category : #accessing }
+PTIslandGrammarC class >> launchingScript [
+	| visitor |
+	visitor := PTFunctionCreatorVisitor new.
+	'/Users/larcheveque/Downloads/linux-master/arch/alpha'
+		asFileReference allFiles
+		select: [ :aFile | aFile extension = 'c' ]
+		thenDo: [ :aFile | 
+			visitor currentFile: aFile.
+			(PTIslandCParser parse: aFile contents) acceptVisitor: visitor ].
+	visitor functionList
 ]
 
 { #category : #accessing }
@@ -77,8 +91,13 @@ PTIslandGrammarC >> identifier [
 ]
 
 { #category : #rules }
+PTIslandGrammarC >> if [
+	^ 'if' asPParser, codeInParenthesis trim, codeInBrackets 
+]
+
+{ #category : #rules }
 PTIslandGrammarC >> island [
-	^ forLoop / whileLoop
+	^ forLoop / whileLoop / if
 ]
 
 { #category : #rules }
