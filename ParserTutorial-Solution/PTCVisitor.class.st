@@ -21,9 +21,9 @@ PTCVisitor >> visitPTASTCFile: aPTASTCFile [
 ]
 
 { #category : #visiting }
-PTCVisitor >> visitPTASTCodeInBrackets: aPTASTCodeInBrackets [
+PTCVisitor >> visitPTASTCodeInCurlyBraces: aPTASTCodeInCurlyBraces [
 	<generated>
-	self visitAll: aPTASTCodeInBrackets contents.
+	self visitAll: aPTASTCodeInCurlyBraces contents.
 ]
 
 { #category : #visiting }
@@ -36,7 +36,7 @@ PTCVisitor >> visitPTASTCodeInParenthesis: aPTASTCodeInParenthesis [
 PTCVisitor >> visitPTASTForLoop: aPTASTForLoop [
 	<generated>
 	self visit: aPTASTForLoop codeInParenthesis.
-	self visit: aPTASTForLoop codeInBrackets.
+	self visit: aPTASTForLoop codeInCurlyBraces.
 ]
 
 { #category : #visiting }
@@ -44,7 +44,7 @@ PTCVisitor >> visitPTASTFunction: aPTASTFunction [
 	<generated>
 	self visit: aPTASTFunction identifier.
 	self visit: aPTASTFunction codeInParenthesis.
-	self visit: aPTASTFunction codeInBrackets.
+	self visit: aPTASTFunction codeInCurlyBraces.
 ]
 
 { #category : #visiting }
@@ -57,7 +57,7 @@ PTCVisitor >> visitPTASTIdentifier: anPTASTIdentifier [
 PTCVisitor >> visitPTASTIf: aPTASTIf [
 	<generated>
 	self visit: aPTASTIf codeInParenthesis.
-	self visit: aPTASTIf codeInBrackets.
+	self visit: aPTASTIf codeInCurlyBraces.
 ]
 
 { #category : #visiting }
@@ -67,9 +67,9 @@ PTCVisitor >> visitPTASTIsland: aPTASTIsland [
 ]
 
 { #category : #visiting }
-PTCVisitor >> visitPTASTIslandBracket: anPTASTIslandBracket [
+PTCVisitor >> visitPTASTIslandCurlyBraces: anPTASTIslandCurlyBraces [
 	<generated>
-	^ anPTASTIslandBracket islandBracket
+	^ anPTASTIslandCurlyBraces islandCurlyBraces
 ]
 
 { #category : #visiting }
@@ -82,5 +82,5 @@ PTCVisitor >> visitPTASTIslandParenthesis: anPTASTIslandParenthesis [
 PTCVisitor >> visitPTASTWhileLoop: aPTASTWhileLoop [
 	<generated>
 	self visit: aPTASTWhileLoop codeInParenthesis.
-	self visit: aPTASTWhileLoop codeInBrackets.
+	self visit: aPTASTWhileLoop codeInCurlyBraces.
 ]

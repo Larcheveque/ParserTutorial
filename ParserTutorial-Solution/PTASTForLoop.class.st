@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'codeInParenthesis',
-		'codeInBrackets'
+		'codeInCurlyBraces'
 	],
 	#category : #'ParserTutorial-Solution-AST'
 }
@@ -15,13 +15,13 @@ PTASTForLoop >> acceptVisitor: aVisitor [
 ]
 
 { #category : #accessing }
-PTASTForLoop >> codeInBrackets [
-	^ codeInBrackets
+PTASTForLoop >> codeInCurlyBraces [
+	^ codeInCurlyBraces
 ]
 
 { #category : #accessing }
-PTASTForLoop >> codeInBrackets: anObject [
-	codeInBrackets := anObject
+PTASTForLoop >> codeInCurlyBraces: anObject [
+	codeInCurlyBraces := anObject
 ]
 
 { #category : #accessing }

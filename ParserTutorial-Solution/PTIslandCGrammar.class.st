@@ -1,35 +1,35 @@
 Class {
-	#name : #PTIslandGrammarC,
+	#name : #PTIslandCGrammar,
 	#superclass : #PP2CompositeNode,
 	#instVars : [
 		'identifier',
 		'function',
 		'codeInParenthesis',
-		'codeInBrackets',
+		'codeInCurlyBraces',
 		'cFile',
 		'forLoop',
 		'whileLoop',
 		'island',
-		'islandBracket',
 		'islandParenthesis',
-		'if'
+		'if',
+		'islandCurlyBraces'
 	],
 	#category : #'ParserTutorial-Solution'
 }
 
 { #category : #translating }
-PTIslandGrammarC class >> generate [
+PTIslandCGrammar class >> generate [
 	<script>
 	PPTASTGenerator
-		generateEverythingFrom: PTIslandGrammarC
+		generateEverythingFrom: PTIslandCGrammar
 		generationStrategy: self generationStrategy
 ]
 
 { #category : #accessing }
-PTIslandGrammarC class >> generationStrategy [ 
+PTIslandCGrammar class >> generationStrategy [ 
 	^ PPASTGeneratorStrategy  new
 		rulesToFlatten:
-			#(identifier islandParenthesis islandBracket);
+			#(identifier islandParenthesis islandCurlyBraces);
 		rulesToIgnore: #(cFile);
 		parserPackage: #'ParserTutorial-Solution';
 		parserClass: #PTIslandCParser;
@@ -42,7 +42,7 @@ PTIslandGrammarC class >> generationStrategy [
 ]
 
 { #category : #accessing }
-PTIslandGrammarC class >> launchingScript [
+PTIslandCGrammar class >> launchingScript [
 	| visitor |
 	visitor := PTFunctionCreatorVisitor new.
 	'/Users/larcheveque/Downloads/linux-master/arch/alpha'
@@ -55,19 +55,19 @@ PTIslandGrammarC class >> launchingScript [
 ]
 
 { #category : #accessing }
-PTIslandGrammarC >> cFile [
+PTIslandCGrammar >> cFile [
 	^ (function / #any asPParser) star
 ]
 
 { #category : #rules }
-PTIslandGrammarC >> codeInBrackets [
-	<reify: #(island / codeInBrackets / islandBracket) into: #content>
-	^ ${ asPParser , (island / codeInBrackets / islandBracket) star
+PTIslandCGrammar >> codeInCurlyBraces [
+	<reify: #(island / codeInCurlyBraces / islandCurlyBraces) into: #content>
+	^ ${ asPParser , (island / codeInCurlyBraces / islandCurlyBraces) star
 		, $} asPParser
 ]
 
 { #category : #rules }
-PTIslandGrammarC >> codeInParenthesis [
+PTIslandCGrammar >> codeInParenthesis [
 	<reify: #(island / codeInParenthesis / islandParenthesis) into: #content>
 	^ $( asPParser
 		, (island / codeInParenthesis / islandParenthesis) star
@@ -75,47 +75,47 @@ PTIslandGrammarC >> codeInParenthesis [
 ]
 
 { #category : #rules }
-PTIslandGrammarC >> forLoop [
-	^ 'for' asPParser, codeInParenthesis trim, codeInBrackets 
+PTIslandCGrammar >> forLoop [
+	^ 'for' asPParser, codeInParenthesis trim, codeInCurlyBraces 
 ]
 
 { #category : #rules }
-PTIslandGrammarC >> function [
-	^ identifier, codeInParenthesis trim, codeInBrackets
+PTIslandCGrammar >> function [
+	^ identifier, codeInParenthesis trim, codeInCurlyBraces
 ]
 
 { #category : #rules }
-PTIslandGrammarC >> identifier [
+PTIslandCGrammar >> identifier [
 	^( #letter asPParser / $_ asPParser
 		, (#letter asPParser / $_ asPParser / #digit asPParser) star) flatten
 ]
 
 { #category : #rules }
-PTIslandGrammarC >> if [
-	^ 'if' asPParser, codeInParenthesis trim, codeInBrackets 
+PTIslandCGrammar >> if [
+	^ 'if' asPParser, codeInParenthesis trim, codeInCurlyBraces 
 ]
 
 { #category : #rules }
-PTIslandGrammarC >> island [
+PTIslandCGrammar >> island [
 	^ forLoop / whileLoop / if
 ]
 
 { #category : #rules }
-PTIslandGrammarC >> islandBracket [
+PTIslandCGrammar >> islandCurlyBraces [
 	^ $} asPParser negate
 ]
 
 { #category : #rules }
-PTIslandGrammarC >> islandParenthesis [
+PTIslandCGrammar >> islandParenthesis [
 	^ $) asPParser negate
 ]
 
 { #category : #accessing }
-PTIslandGrammarC >> start [
+PTIslandCGrammar >> start [
 	^ cFile
 ]
 
 { #category : #rules }
-PTIslandGrammarC >> whileLoop [
-	^ 'while' asPParser, codeInParenthesis trim, codeInBrackets 
+PTIslandCGrammar >> whileLoop [
+	^ 'while' asPParser, codeInParenthesis trim, codeInCurlyBraces 
 ]

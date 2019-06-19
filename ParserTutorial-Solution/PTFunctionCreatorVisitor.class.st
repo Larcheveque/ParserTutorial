@@ -56,7 +56,7 @@ PTFunctionCreatorVisitor >> visitPTASTFunction: aPTASTFunction [
 				file: self currentFile;
 				yourself).
 	self visit: aPTASTFunction codeInParenthesis.
-	self visit: aPTASTFunction codeInBrackets
+	self visit: aPTASTFunction codeInCurlyBraces
 ]
 
 { #category : #visiting }

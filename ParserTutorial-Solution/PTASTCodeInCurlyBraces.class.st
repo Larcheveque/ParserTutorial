@@ -1,5 +1,5 @@
 Class {
-	#name : #PTASTCodeInBrackets,
+	#name : #PTASTCodeInCurlyBraces,
 	#superclass : #Object,
 	#instVars : [
 		'contents'
@@ -8,17 +8,17 @@ Class {
 }
 
 { #category : #visiting }
-PTASTCodeInBrackets >> acceptVisitor: aVisitor [
+PTASTCodeInCurlyBraces >> acceptVisitor: aVisitor [
 	<generated>
-	^ aVisitor visitPTASTCodeInBrackets: self
+	^ aVisitor visitPTASTCodeInCurlyBraces: self
 ]
 
 { #category : #accessing }
-PTASTCodeInBrackets >> contents [
+PTASTCodeInCurlyBraces >> contents [
 	^ contents
 ]
 
 { #category : #accessing }
-PTASTCodeInBrackets >> contents: anObject [
+PTASTCodeInCurlyBraces >> contents: anObject [
 	contents := anObject
 ]

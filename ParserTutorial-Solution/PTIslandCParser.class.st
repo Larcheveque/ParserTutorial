@@ -1,6 +1,6 @@
 Class {
 	#name : #PTIslandCParser,
-	#superclass : #PTIslandGrammarC,
+	#superclass : #PTIslandCGrammar,
 	#category : #'ParserTutorial-Solution'
 }
 
@@ -14,9 +14,9 @@ PTIslandCParser >> cFile [
 ]
 
 { #category : #rules }
-PTIslandCParser >> codeInBrackets [
+PTIslandCParser >> codeInCurlyBraces [
 	<generated>
-	^ super codeInBrackets ==> [ :production | PTASTCodeInBrackets new contents: (production at: 2); yourself ]
+	^ super codeInCurlyBraces ==> [ :production | PTASTCodeInCurlyBraces new contents: (production at: 2); yourself ]
 ]
 
 { #category : #rules }
@@ -28,13 +28,13 @@ PTIslandCParser >> codeInParenthesis [
 { #category : #rules }
 PTIslandCParser >> forLoop [
 	<generated>
-	^ super forLoop ==> [ :production | PTASTForLoop new codeInParenthesis: (production at: 2); codeInBrackets: (production at: 3); yourself ]
+	^ super forLoop ==> [ :production | PTASTForLoop new codeInParenthesis: (production at: 2); codeInCurlyBraces: (production at: 3); yourself ]
 ]
 
 { #category : #rules }
 PTIslandCParser >> function [
 	<generated>
-	^ super function ==> [ :production | PTASTFunction new identifier: (production at: 1); codeInParenthesis: (production at: 2); codeInBrackets: (production at: 3); yourself ]
+	^ super function ==> [ :production | PTASTFunction new identifier: (production at: 1); codeInParenthesis: (production at: 2); codeInCurlyBraces: (production at: 3); yourself ]
 ]
 
 { #category : #rules }
@@ -46,7 +46,7 @@ PTIslandCParser >> identifier [
 { #category : #rules }
 PTIslandCParser >> if [
 	<generated>
-	^ super if ==> [ :production | PTASTIf new codeInParenthesis: (production at: 2); codeInBrackets: (production at: 3); yourself ]
+	^ super if ==> [ :production | PTASTIf new codeInParenthesis: (production at: 2); codeInCurlyBraces: (production at: 3); yourself ]
 ]
 
 { #category : #rules }
@@ -56,9 +56,9 @@ PTIslandCParser >> island [
 ]
 
 { #category : #rules }
-PTIslandCParser >> islandBracket [
+PTIslandCParser >> islandCurlyBraces [
 	<generated>
-	^ super islandBracket flatten  ==> [ :production | PTASTIslandBracket new islandBracket: production; yourself ]
+	^ super islandCurlyBraces flatten  ==> [ :production | PTASTIslandCurlyBraces new islandCurlyBraces: production; yourself ]
 ]
 
 { #category : #rules }
@@ -82,5 +82,5 @@ PTIslandCParser >> selectSeparators: anArray [
 { #category : #rules }
 PTIslandCParser >> whileLoop [
 	<generated>
-	^ super whileLoop ==> [ :production | PTASTWhileLoop new codeInParenthesis: (production at: 2); codeInBrackets: (production at: 3); yourself ]
+	^ super whileLoop ==> [ :production | PTASTWhileLoop new codeInParenthesis: (production at: 2); codeInCurlyBraces: (production at: 3); yourself ]
 ]

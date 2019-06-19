@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'identifier',
 		'codeInParenthesis',
-		'codeInBrackets'
+		'codeInCurlyBraces'
 	],
 	#category : #'ParserTutorial-Solution-AST'
 }
@@ -16,13 +16,13 @@ PTASTFunction >> acceptVisitor: aVisitor [
 ]
 
 { #category : #accessing }
-PTASTFunction >> codeInBrackets [
-	^ codeInBrackets
+PTASTFunction >> codeInCurlyBraces [
+	^ codeInCurlyBraces
 ]
 
 { #category : #accessing }
-PTASTFunction >> codeInBrackets: anObject [
-	codeInBrackets := anObject
+PTASTFunction >> codeInCurlyBraces: anObject [
+	codeInCurlyBraces := anObject
 ]
 
 { #category : #accessing }
