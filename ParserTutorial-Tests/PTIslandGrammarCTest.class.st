@@ -6,7 +6,71 @@ Class {
 
 { #category : #accessing }
 PTIslandGrammarCTest >> parserClass [
-	^ PTIslandGrammarC 
+	^ PTIslandCGrammar 
+]
+
+{ #category : #accessing }
+PTIslandGrammarCTest >> testCodeInCurlyBraces1 [
+	self parse: '{
+			soft_qbb = temp & 7;
+		}' rule: #codeInCurlyBraces
+]
+
+{ #category : #accessing }
+PTIslandGrammarCTest >> testCodeInCurlyBraces2 [
+	self parse: '{}' rule: #codeInCurlyBraces
+]
+
+{ #category : #accessing }
+PTIslandGrammarCTest >> testCodeInCurlyBraces3 [
+	self parse: '{
+			if (temp & 8) { /* Is there a QBB? */
+				soft_qbb = temp & 7;
+				wildfire_hard_qbb_mask |= (1 << hard_qbb);
+				wildfire_soft_qbb_mask |= (1 << soft_qbb);
+			}
+			temp >>= 4;
+		}' rule: #codeInCurlyBraces
+]
+
+{ #category : #accessing }
+PTIslandGrammarCTest >> testCodeInParenthesis1 [
+	self parse: '(i = 0; i < 2; i++)' rule: #codeInParenthesis
+]
+
+{ #category : #accessing }
+PTIslandGrammarCTest >> testCodeInParenthesis2 [
+	self parse: '()' rule: #codeInParenthesis
+]
+
+{ #category : #accessing }
+PTIslandGrammarCTest >> testCodeInParenthesis3 [
+	self parse: '(i = 0; (i < 2); i++)' rule: #codeInParenthesis
+]
+
+{ #category : #accessing }
+PTIslandGrammarCTest >> testForLoop1 [
+	self parse: 'for (i = 0; i < 2; i++) {
+		}' rule: #forLoop
+]
+
+{ #category : #accessing }
+PTIslandGrammarCTest >> testForLoop2 [
+	self parse: 'for (i = 0; i < 2; i++) {
+	break;
+		}' rule: #forLoop
+]
+
+{ #category : #accessing }
+PTIslandGrammarCTest >> testForLoop3 [
+	self parse: 'for (hard_qbb = 0; hard_qbb < WILDFIRE_MAX_QBB; hard_qbb++) {
+			if (temp & 8) { /* Is there a QBB? */
+				soft_qbb = temp & 7;
+				wildfire_hard_qbb_mask |= (1 << hard_qbb);
+				wildfire_soft_qbb_mask |= (1 << soft_qbb);
+			}
+			temp >>= 4;
+		}' rule: #forLoop
 ]
 
 { #category : #accessing }
@@ -30,6 +94,16 @@ PTIslandGrammarCTest >> testIdentifier4 [
 ]
 
 { #category : #accessing }
+PTIslandGrammarCTest >> testIdentifier5 [
+	self fail: 'ans wer' rule: #identifier
+]
+
+{ #category : #accessing }
+PTIslandGrammarCTest >> testIdentifier6 [
+	self parse: 'AnSwEr42' rule: #identifier
+]
+
+{ #category : #accessing }
 PTIslandGrammarCTest >> testSimpleFunction [
 	self parse: '__kmalloc(size_t size, gfp_t flags)
 {
@@ -43,6 +117,18 @@ PTIslandGrammarCTest >> testWhileLoop1 [
 		{
 i += 5;
 		}' rule: #whileLoop
+]
+
+{ #category : #accessing }
+PTIslandGrammarCTest >> testWhileLoop2 [
+	self parse: 'while (true)
+		{}' rule: #whileLoop
+]
+
+{ #category : #accessing }
+PTIslandGrammarCTest >> testWhileLoop3 [
+	self parse: 'while (true)
+		{ while (false){}}' rule: #whileLoop
 ]
 
 { #category : #accessing }
