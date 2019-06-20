@@ -104,6 +104,11 @@ PTIslandGrammarCTest >> testIdentifier6 [
 ]
 
 { #category : #accessing }
+PTIslandGrammarCTest >> testIdentifier7 [
+	self parse: 'a' rule: #identifier
+]
+
+{ #category : #accessing }
 PTIslandGrammarCTest >> testSimpleFunction [
 	self parse: '__kmalloc(size_t size, gfp_t flags)
 {
