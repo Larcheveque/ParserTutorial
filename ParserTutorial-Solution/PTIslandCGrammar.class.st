@@ -37,11 +37,11 @@ PTIslandCGrammar class >> generationStrategy [
 		rulesToFlatten:
 			#(identifier islandParenthesis islandCurlyBraces);
 		rulesToIgnore: #(cFile);
-		parserPackage: #'ParserTutorial-Solution';
+		parserPackage: #'ParserTutorial-Solution-Grammar';
 		parserClass: #PTIslandCParser;
 		astPackage: #'ParserTutorial-Solution-AST';
 		astPrefix: #PTAST;
-		visitorPackage: #'ParserTutorial-Solution';
+		visitorPackage: #'ParserTutorial-Solution-Visitor';
 		visitorClass: #PTCVisitor;
 		yourself
 ]
@@ -72,8 +72,21 @@ PTIslandCGrammar class >> launchingScript3 [
 	self folderToAnalyse allFiles
 		select: [ :aFile | aFile extension = 'c' ]
 		thenDo: [ :aFile | 
-			visitor currentFile: aFile.
 			(#PTIslandCParser asClass parse: aFile contents)
+				acceptVisitor: visitor ].
+	visitor functionList inspect
+]
+
+{ #category : #accessing }
+PTIslandCGrammar class >> launchingScript4 [
+	<script>
+	| visitor |
+	visitor := PTFunctionCreatorVisitor new.
+	self folderToAnalyse allFiles
+		select: [ :aFile | aFile extension = 'c' ]
+		thenDo: [ :aFile | 
+			(#PTIslandCParser asClass parse: aFile contents)
+				file: aFile;
 				acceptVisitor: visitor ].
 	visitor functionList inspect
 ]

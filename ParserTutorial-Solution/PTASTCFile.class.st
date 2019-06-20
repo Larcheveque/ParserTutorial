@@ -2,7 +2,8 @@ Class {
 	#name : #PTASTCFile,
 	#superclass : #Object,
 	#instVars : [
-		'contents'
+		'contents',
+		'file'
 	],
 	#category : #'ParserTutorial-Solution-AST'
 }
@@ -21,4 +22,14 @@ PTASTCFile >> contents [
 { #category : #accessing }
 PTASTCFile >> contents: anObject [
 	contents := anObject
+]
+
+{ #category : #accessing }
+PTASTCFile >> file [
+	^ file
+]
+
+{ #category : #accessing }
+PTASTCFile >> file: anObject [
+	file := anObject
 ]

@@ -5,7 +5,7 @@ Class {
 		'functionList',
 		'currentFile'
 	],
-	#category : #'ParserTutorial-Solution'
+	#category : #'ParserTutorial-Solution-Visitor'
 }
 
 { #category : #accessing }
@@ -37,6 +37,12 @@ PTFunctionCreatorVisitor >> functionList: anObject [
 PTFunctionCreatorVisitor >> initialize [ 
 	super initialize.
 	functionList := OrderedCollection new
+]
+
+{ #category : #visiting }
+PTFunctionCreatorVisitor >> visitPTASTCFile: aPTASTCFile [
+	self currentFile: aPTASTCFile file.
+	super visitPTASTCFile: aPTASTCFile 
 ]
 
 { #category : #visiting }
